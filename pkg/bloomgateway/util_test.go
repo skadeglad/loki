@@ -11,6 +11,7 @@ import (
 	v1 "github.com/grafana/loki/v3/pkg/storage/bloom/v1"
 	"github.com/grafana/loki/v3/pkg/storage/config"
 	"github.com/grafana/loki/v3/pkg/storage/stores/shipper/bloomshipper"
+	"github.com/grafana/loki/v3/pkg/util/mempool"
 )
 
 func parseDayTime(s string) config.DayTime {
@@ -433,7 +434,7 @@ func createBlocks(t *testing.T, tenant string, n int, from, through model.Time, 
 		// 	}
 		// }
 		querier := &bloomshipper.CloseableBlockQuerier{
-			BlockQuerier: v1.NewBlockQuerier(block, &v1.SimpleHeapAllocator{}, v1.DefaultMaxPageSize),
+			BlockQuerier: v1.NewBlockQuerier(block, &mempool.SimpleHeapAllocator{}, v1.DefaultMaxPageSize),
 			BlockRef:     blockRef,
 		}
 		queriers = append(queriers, querier)
