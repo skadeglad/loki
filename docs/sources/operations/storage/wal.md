@@ -23,7 +23,7 @@ In the event the WAL is corrupted/partially deleted, Loki will not be able to re
 
 You can use the Prometheus metric `loki_ingester_wal_corruptions_total` to track and alert when this happens.
 
-1) No space left on disk
+2) No space left on disk
 
 In the event the underlying WAL disk is full, Loki will not fail incoming writes, but neither will it log them to the WAL. In this case, the persistence guarantees across process restarts will not hold.
 
